@@ -18,6 +18,7 @@ async function run() {
         const productCollection = client.db('cameraZone').collection('product');
         const reviewCollection = client.db('cameraZone').collection('review');
         const portfolioCollectoin = client.db('cameraZone').collection('portfolio');
+        const orderCollectoin = client.db('cameraZone').collection('order');
 
 
 
@@ -28,6 +29,16 @@ async function run() {
             const products = await cursor.toArray();
             res.send(products);
         });
+
+        // Add new item API
+        app.get('/order', async (req, res) => {
+            // Finding data according to different user
+            const email = req.query.email;
+            const query = { email: email };
+            const cursor = newItemCollection.find(query);
+            const addOrder = await cursor.toArray();
+            res.send(addOrder);
+        })
 
         // API For Reviews
         app.get('/review', async (req, res) => {
