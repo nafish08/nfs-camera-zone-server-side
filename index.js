@@ -40,8 +40,13 @@ async function run() {
         // API For User Portfolio
         app.post('/portfolio', async (req, res) => {
             const portfolio = req.body;
+            const query = { email: user.email, name: user.displayName }
+            const exists = await bookingCollection.findOne(query);
+            if (exists) {
+                return res.send({ success: false, portfolio: exists })
+            }
             const result = await portfolioCollectoin.insertOne(portfolio);
-            res.send(result);
+            return res.send({ success: true, result });
         })
     }
     finally {
