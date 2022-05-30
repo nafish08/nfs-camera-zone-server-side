@@ -35,9 +35,16 @@ async function run() {
             // Finding data according to different user
             const email = req.query.email;
             const query = { email: email };
-            const cursor = newItemCollection.find(query);
+            const cursor = orderCollectoin.find(query);
             const addOrder = await cursor.toArray();
             res.send(addOrder);
+        })
+
+        // Adding orders
+        app.post('/order', async (req, res) => {
+            const newAdded = req.body;
+            const result = await orderCollectoin.insertOne(newAdded);
+            res.send(result);
         })
 
         // API For Reviews
