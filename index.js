@@ -17,8 +17,11 @@ async function run() {
         await client.connect();
         const productCollection = client.db('cameraZone').collection('product');
         const reviewCollection = client.db('cameraZone').collection('review');
+        const portfolioCollectoin = client.db('cameraZone').collection('portfolio');
 
-        // For Products
+
+
+        // API For Products
         app.get('/product', async (req, res) => {
             const query = {};
             const cursor = productCollection.find(query);
@@ -26,13 +29,20 @@ async function run() {
             res.send(products);
         });
 
-        // For Reviews
+        // API For Reviews
         app.get('/review', async (req, res) => {
             const query = {};
             const cursor = reviewCollection.find(query);
             const reviews = await cursor.toArray();
             res.send(reviews);
         });
+
+        // API For User Portfolio
+        app.post('/portfolio', async (req, res) => {
+            const portfolio = req.body;
+            const result = await portfolioCollectoin.insertOne(portfolio);
+            res.send(result);
+        })
     }
     finally {
 
