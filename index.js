@@ -20,8 +20,6 @@ async function run() {
         const portfolioCollectoin = client.db('cameraZone').collection('portfolio');
         const orderCollectoin = client.db('cameraZone').collection('order');
 
-
-
         // API For Products
         app.get('/product', async (req, res) => {
             const query = {};
