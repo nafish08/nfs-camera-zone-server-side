@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 
-const uri = process.env.MONGOD_CONNECT_URI;
+const uri = `mongodb+srv://${nfsCameraZone}:${FY7DS7KX7opyAGqJ}@cluster0.3lmgp.mongodb.net/?retryWrites=true&w=majority`
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 async function run() {
     try {
